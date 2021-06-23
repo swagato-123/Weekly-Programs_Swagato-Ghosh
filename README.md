@@ -1,12 +1,15 @@
 //1.CURRENCY
 //........................................................................................................................................
+
 import java.util.*;
+
 import java.lang.*;
  
 
 public class Currency {
-	
-	public static void countCurrency(int amount)
+
+ public static void countCurrency(int amount)
+ 
     {
         int[] notes = new int[]{ 2000, 500, 200, 100, 50, 20, 10, 5, 2,1 };
         int[] noteCounter = new int[10];
@@ -54,10 +57,11 @@ Currency Count ->
 
 //2.Daily Market
 //.........................................................................................................................................
+
 import java.util.*;
+
 public class Dailymarket {
 
-	    
 	    public static void Calculations(float x, float y, float z, float t, float w, int month,int year)
 	    {
 	        float days=numberDays(month,year);
@@ -261,7 +265,7 @@ public class Magicalnumber {
 OUTPUT:
 Enter total numbers input and the individual number separated by space.
 6 1 2 3 4 5 6
-Magical Magical Magical Magical Magical Magica
+Magical Magical Magical Magical Magical Magical
 //..............................
 
 
@@ -272,8 +276,15 @@ Magical Magical Magical Magical Magical Magica
 
 
 
+
+
+
+
+
+
 //5.Grant or not
-//.......................................................................................................................................
+//.......................................................................................................................................//
+
 import java.io.*;
 
 public class Grant_calculated {
@@ -283,8 +294,6 @@ public class Grant_calculated {
 		   
 		   int month[] = { 31, 28, 31, 30, 31, 30, 31,
                    31, 30, 31, 30, 31 };
-
-
 if (birth_date > current_date) {
   current_month = current_month - 1;
   current_date = current_date + month[birth_month - 1];
@@ -296,7 +305,9 @@ if (birth_month > current_month) {
 }
 
 int calculated_date = current_date - birth_date;
+
 int calculated_month = current_month - birth_month;
+
 int calculated_year = current_year - birth_year;
 
 int z=calculated_year * 12;
@@ -304,44 +315,65 @@ int w=z*4;
 
 
 System.out.println("Present Age");
+
 System.out.println("Years: " + calculated_year +
       " Months: " + calculated_month + " Days: " +
       calculated_date);
+      
 System.out.println("total month of his life:"+z);
+
 System.out.println("total weeks of his life:"+w);
 
-//calculated divisior.....................................
+//calculated divisior.....................................//
+
 int array[]=new int[30];
+
 int m=0;
-//System.out.println("Divisior of "+w+"=");
+
+//System.out.println("Divisior of "+w+"=");//
+
 for (int i=1;i<=w;i++){
+
     if (w%i==0){
+    
     	array[m]=i;
+	
         m++;
     	}      
 }
+
 int u;
+
 //here will show divisor of weeks
+
 //for(u=0; u<m;u++)
+
 //{
+
 //	System.out.print(array[u]+" ");
 //	
+
 //}
+
 int array1[]=new int[100];
+
 int array2[]=new int[100];
+
 int q=0;
+
 int p=0;
+
 int sum_even=0;
+
 int sum_odd=0;
+
 for(u=0;u<m;u++){	
 	if(array[u]%2==0)
 	{
 		
 		array1[q]=array[u];
 		q++;
-		//System.out.println(array1[q]);
-		
-		
+		//System.out.println(array1[q]);	
 	}
 	else
 	{
@@ -351,37 +383,44 @@ for(u=0;u<m;u++){
 	}
 	
 }
+//for sum of even......................//
 
-
-//for sum of even......................
 for(int x=0;x<q;x++)
 {
 	sum_even=sum_even+array1[x];
 	
 	//System.out.println("\nsum of prime factor: "+sum_even);
 }
+
 System.out.println("\nsum of prime factor: "+sum_even);
-//for sum of odd........................
+
+//for sum of odd........................//
+
 for(int y=0;y<p;y++)
 {
 	sum_odd=sum_odd+array2[y];
 	
 }
+
 System.out.println("\nsum of non prime factor: "+sum_odd);
 
 if(sum_even>sum_odd)
+
 {
 	System.out.println("...GRANT...");
 }
+
 else
+
 {
 	System.out.println("...NOT GRANT...");
 }
-	   }
-//...............................................................................
+
+}
+
 	public static void main(String[] args) {
 		
-		// present date
+		// present date//
         int current_date = 18;
         int current_month = 6;
         int current_year = 2021;
@@ -391,26 +430,30 @@ else
         int birth_month = 2;
         int birth_year = 2001;
  
-        // function call to print age
+        // function call to print age//
         findAge(current_date, current_month, current_year,
               birth_date, birth_month, birth_year);
        
        		   
 
-	}
-
-}
+	}}
 
 //................................................
+
 OUTPUT:
+
 Present Age
+
 Years: 20 Months: 4 Days: 9
+
 total month of his life:240
+
 total weeks of his life:960
 
 sum of prime factor: 3024
 
 sum of non prime factor: 24
+
 ...GRANT...
 
 //................................................
