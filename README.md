@@ -283,177 +283,198 @@ Magical Magical Magical Magical Magical Magical
 
 
 //5.Grant or not
+
 //.......................................................................................................................................//
 
-import java.io.*;
+import java.util.*;
 
-public class Grant_calculated {
-	   static void findAge(int current_date, int current_month,
-               int current_year, int birth_date,
-               int birth_month, int birth_year){
-		   
-		   int month[] = { 31, 28, 31, 30, 31, 30, 31,
-                   31, 30, 31, 30, 31 };
-if (birth_date > current_date) {
-  current_month = current_month - 1;
-  current_date = current_date + month[birth_month - 1];
-	   }
+public class Grant_calculated
+{
+   
+    public static boolean isDateValid(int date,int month, int year)
+    {
+        if(date<0||date>32||month<0||month>12||year<0)
+            return false; 
+        return true;
+    }
+    public static boolean checkYear(int year)
+    {
+        if (((year % 4 == 0) && (year % 100!= 0)) || (year%400 == 0))
+            return true; 
+        return false;
+    }
+    public static int totalDays(int current_date, int current_month, int current_year, int birth_date, int birth_month, int birth_year)
+    {
+        int totalDays=0;
+        int copy_current_date=current_date;
+        int copy_current_month=current_month;
+        int copy_current_year=current_year;
+        int[] month = new int[] { 0,31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+        if(isDateValid(current_date, current_month, current_year) || isDateValid(birth_date, birth_month, birth_year))
+        {
+            if (birth_date > current_date) 
+            {
+                copy_current_month = current_month - 1;
+                copy_current_date = current_date + month[birth_month - 1];
+            }
 
-if (birth_month > current_month) {
-    current_year = current_year - 1;
-    current_month = current_month + 12;
-}
-
-int calculated_date = current_date - birth_date;
-
-int calculated_month = current_month - birth_month;
-
-int calculated_year = current_year - birth_year;
-
-int z=calculated_year * 12;
-int w=z*4;
+            if (birth_month > current_month)  
+            {
+                copy_current_year = current_year - 1;
+                copy_current_month = current_month + 12;
+            }
 
 
-System.out.println("Present Age");
+	    int calculated_date = copy_current_date - birth_date;
+	    int calculated_month = copy_current_month - birth_month;
+	    int calculated_year = copy_current_year - birth_year;
+	    //System.out.println("Calculated date :"+calculated_date);
+	    //System.out.println("Calculated month :"+calculated_month);
+	    System.out.println("Calculated year :"+calculated_year);
+            for(int i=birth_year;i<current_year;i++)
+            {
+                if(checkYear(i))
+                { 
+                    totalDays =totalDays + 366;
+                }
+                else
+                {
+                    totalDays =totalDays + 365;
+                }
+            }
+            //System.out.println("totaldays in the years"+totalDays);
+            boolean isLeap=checkYear(current_year);
+            if (isLeap &&  calculated_month > 2)
+			totalDays = totalDays + 1;
+		for (int i = 1; i < calculated_month; i++) 
+		{
 
-System.out.println("Years: " + calculated_year +
-      " Months: " + calculated_month + " Days: " +
-      calculated_date);
-      
-System.out.println("total month of his life:"+z);
+			totalDays = totalDays + month[i];
 
-System.out.println("total weeks of his life:"+w);
+		}
 
-//calculated divisior.....................................//
-
-int array[]=new int[30];
-
-int m=0;
-
-//System.out.println("Divisior of "+w+"=");//
-
-for (int i=1;i<=w;i++){
-
-    if (w%i==0){
-    
-    	array[m]=i;
-	
-        m++;
-    	}      
-}
-
-int u;
-
-//here will show divisor of weeks
-
-//for(u=0; u<m;u++)
-
-//{
-
-//	System.out.print(array[u]+" ");
-//	
-
-//}
-
-int array1[]=new int[100];
-
-int array2[]=new int[100];
-
-int q=0;
-
-int p=0;
-
-int sum_even=0;
-
-int sum_odd=0;
-
-for(u=0;u<m;u++){	
-	if(array[u]%2==0)
-	{
-		
-		array1[q]=array[u];
-		q++;
-		//System.out.println(array1[q]);	
+		return totalDays + calculated_date;
 	}
 	else
-	{
-		array2[p]=array[u];
-		p++;
-		
-	}
+	       return 0;
+    }
+    public static void divisor(int totalDays)
+    {
+        int weeks= totalDays/7;
+        System.out.println("total Weeks = "+weeks);
+        int array[]=new int[100];
+        int m=0;
+        for (int i=1;i<=weeks;i++)
+        {
+            if (weeks%i==0)
+            {
+                array[m]=i;
+                m++;
+            }      
+        }
 	
-}
-//for sum of even......................//
+//for show divisior of weeks
 
-for(int x=0;x<q;x++)
-{
-	sum_even=sum_even+array1[x];
-	
-	//System.out.println("\nsum of prime factor: "+sum_even);
-}
+//        int u;
 
-System.out.println("\nsum of prime factor: "+sum_even);
+//        for(u=0; u<m;u++)
 
-//for sum of odd........................//
+//        {
 
-for(int y=0;y<p;y++)
-{
-	sum_odd=sum_odd+array2[y];
-	
-}
+//            System.out.println(array[u]+" ");
+//	
+//        }
 
-System.out.println("\nsum of non prime factor: "+sum_odd);
+        int q=0;//for prime
+        int p=0;//for non prime
+        int c=0;
+        for(int x=0 ; x<m;x++)
+        {
+            int factors = array[x];
+            for(int i = 3; i <factors; i++)
+            {
+                if(factors%i==0)
+                c++;
+            }
+            if(c==0)
+            {   
+                
+                q=q+factors;
+                //System.out.println("prime factors="+factors);
+                
+            }
+            else
+            {
+            	
+                p=p+factors;
+                //System.out.println("non prime factors="+factors);
+            }
+            
+            
+        }
+        System.out.println("total of prime factors="+q);
+        System.out.println("total of non prime factors="+p);
 
-if(sum_even>sum_odd)
+        if(q>p)
+            System.out.println("Granted");
+        else
+           System.out.println("NOT Granted");
+    }
+                
+        
+            
+                
 
-{
-	System.out.println("...GRANT...");
-}
-
-else
-
-{
-	System.out.println("...NOT GRANT...");
-}
-
-}
-
-	public static void main(String[] args) {
-		
-		// present date//
-        int current_date = 18;
-        int current_month = 6;
-        int current_year = 2021;
+    public static void main(String[] args)
+    {
+        	// present date
+    	Scanner sc=new Scanner(System.in);
+    	System.out.println("current date=");
+    	int current_date=sc.nextInt();
+    	System.out.println("current month=");
+    	int current_month=sc.nextInt();
+    	System.out.println("current year=");
+    	int current_year=sc.nextInt();
  
         // birth dd// mm// yyyy
-        int birth_date = 9;
-        int birth_month = 2;
-        int birth_year = 2001;
- 
-        // function call to print age//
-        findAge(current_date, current_month, current_year,
-              birth_date, birth_month, birth_year);
-       
-       		   
+    	System.out.println("birth date=");
+    	int birth_date=sc.nextInt();
+    	System.out.println("birth month=");
+    	int birth_month=sc.nextInt();
+    	System.out.println("birth year=");
+    	int birth_year=sc.nextInt();
+        int totalDays= totalDays( current_date,  current_month,  current_year,  birth_date,  birth_month,  birth_year);
+        System.out.println("total days = "+totalDays);
+        divisor(totalDays);
+    }
+}
 
-	}}
+//...................................
 
-//................................................
+//OUTPUT
 
-OUTPUT:
+urrent date=
+23
+current month=
+6
+current year=
+2021
+birth date=
+9
+birth month=
+2
+birth year=
+2001
+Calculated year :20
 
-Present Age
+total days = 7409
 
-Years: 20 Months: 4 Days: 9
+total Weeks = 1058
 
-total month of his life:240
+total of prime factors=26
 
-total weeks of his life:960
+total of non prime factors=1633
 
-sum of prime factor: 3024
+NOT Granted
 
-sum of non prime factor: 24
 
-...GRANT...
-
-//................................................
